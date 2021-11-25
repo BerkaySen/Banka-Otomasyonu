@@ -1,0 +1,7 @@
+Çalışan Profili Giriş Yapmak İçin
+Kullanıcı Adı : CalisanProfil
+Şifre : 123456
+--------------------------------------------
+Müşteri Profili Giriş Yapmak İçin
+Kullanıcı Adı : MusteriProfil
+Şifre : 123456

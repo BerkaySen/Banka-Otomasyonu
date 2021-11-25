@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BankaOtomasyonDbModelStoreContainer" CdmEntityContainer="BankaOtomasyonEModel">
+    <EntitySetMapping Name="HarcamaKategoriTbls">
+      <EntityTypeMapping TypeName="BankaOtomasyonDbModel.HarcamaKategoriTbl">
+        <MappingFragment StoreEntitySet="HarcamaKategoriTbl">
+          <ScalarProperty Name="KategoriAdi" ColumnName="KategoriAdi" />
+          <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HesapTbls">
+      <EntityTypeMapping TypeName="BankaOtomasyonDbModel.HesapTbl">
+        <MappingFragment StoreEntitySet="HesapTbl">
+          <ScalarProperty Name="HesapBakiye" ColumnName="HesapBakiye" />
+          <ScalarProperty Name="IbanNo" ColumnName="IbanNo" />
+          <ScalarProperty Name="HesapNo" ColumnName="HesapNo" />
+          <ScalarProperty Name="MusteriNo" ColumnName="MusteriNo" />
+          <ScalarProperty Name="HesapId" ColumnName="HesapId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KrediHarcamaDetayTbls">
+      <EntityTypeMapping TypeName="BankaOtomasyonDbModel.KrediHarcamaDetayTbl">
+        <MappingFragment StoreEntitySet="KrediHarcamaDetayTbl">
+          <ScalarProperty Name="IslemTarih" ColumnName="IslemTarih" />
+          <ScalarProperty Name="KartId" ColumnName="KartId" />
+          <ScalarProperty Name="HarcamaKategoriId" ColumnName="HarcamaKategoriId" />
+          <ScalarProperty Name="HarcamaTutar" ColumnName="HarcamaTutar" />
+          <ScalarProperty Name="IslemId" ColumnName="IslemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KrediKartiDetayTbls">
+      <EntityTypeMapping TypeName="BankaOtomasyonDbModel.KrediKartiDetayTbl">
+        <MappingFragment StoreEntitySet="KrediKartiDetayTbl">
+          <ScalarProperty Name="Bakiye" ColumnName="Bakiye" />
+          <ScalarProperty Name="EkstreTarih" ColumnName="EkstreTarih" />
+          <ScalarProperty Name="SonOdeme" ColumnName="SonOdeme" />
+          <ScalarProperty Name="HesapKesTarih" ColumnName="HesapKesTarih" />
+          <ScalarProperty Name="MusteriNo" ColumnName="MusteriNo" />
+          <ScalarProperty Name="KartNo" ColumnName="KartNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KullaniciTbls">
+      <EntityTypeMapping TypeName="BankaOtomasyonDbModel.KullaniciTbl">
+        <MappingFragment StoreEntitySet="KullaniciTbl">
+          <ScalarProperty Name="DogumTarih" ColumnName="DogumTarih" />
+          <ScalarProperty Name="Soyisim" ColumnName="Soyisim" />
+          <ScalarProperty Name="Isım" ColumnName="Isım" />
+          <ScalarProperty Name="TcNo" ColumnName="TcNo" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="KullaniciAd" ColumnName="KullaniciAd" />
+          <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolTbls">
+      <EntityTypeMapping TypeName="BankaOtomasyonDbModel.RolTbl">
+        <MappingFragment StoreEntitySet="RolTbl">
+          <ScalarProperty Name="RolAdi" ColumnName="RolAdi" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BankaOtomasyonDbModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HesapIslemDetays">
+      <EntityTypeMapping TypeName="BankaOtomasyonDbModel.HesapIslemDetay">
+        <MappingFragment StoreEntitySet="HesapIslemDetay">
+          <ScalarProperty Name="IslemTarih" ColumnName="IslemTarih" />
+          <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+          <ScalarProperty Name="IslemTur" ColumnName="IslemTur" />
+          <ScalarProperty Name="HesapNo" ColumnName="HesapNo" />
+          <ScalarProperty Name="IslemId" ColumnName="IslemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

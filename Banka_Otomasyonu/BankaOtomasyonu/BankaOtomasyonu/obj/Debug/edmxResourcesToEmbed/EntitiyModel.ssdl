@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankaOtomasyonDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BankaOtomasyonDbModelStoreContainer">
+    <EntitySet Name="KullaniciTbls" EntityType="BankaOtomasyonDbModel.Store.KullaniciTbls" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RolTbls" EntityType="BankaOtomasyonDbModel.Store.RolTbls" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="BankaOtomasyonDbModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_KullaniciTbl_RolTbl" Association="BankaOtomasyonDbModel.Store.FK_KullaniciTbl_RolTbl">
+      <End Role="RolTbl" EntitySet="RolTbls" />
+      <End Role="KullaniciTbl" EntitySet="KullaniciTbls" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="KullaniciTbls">
+    <Key>
+      <PropertyRef Name="MusteriId" />
+      <PropertyRef Name="KullaniciId" />
+    </Key>
+    <Property Name="MusteriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAd" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Sifre" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="RolId" Type="int" Nullable="false" />
+    <Property Name="KullaniciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RolTbls">
+    <Key>
+      <PropertyRef Name="RolId" />
+    </Key>
+    <Property Name="RolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RolAdi" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <Association Name="FK_KullaniciTbl_RolTbl">
+    <End Role="RolTbl" Type="BankaOtomasyonDbModel.Store.RolTbls" Multiplicity="1" />
+    <End Role="KullaniciTbl" Type="BankaOtomasyonDbModel.Store.KullaniciTbls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RolTbl">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="KullaniciTbl">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

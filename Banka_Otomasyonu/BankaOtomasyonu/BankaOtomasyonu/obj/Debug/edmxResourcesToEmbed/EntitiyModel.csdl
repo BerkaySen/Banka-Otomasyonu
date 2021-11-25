@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankaOtomasyonDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="KullaniciTbl">
+    <Key>
+      <PropertyRef Name="MusteriId" />
+      <PropertyRef Name="KullaniciId" />
+    </Key>
+    <Property Name="MusteriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RolId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RolTbl" Relationship="Self.FK_KullaniciTbl_RolTbl" FromRole="KullaniciTbl" ToRole="RolTbl" />
+    <Property Name="KullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="RolTbl">
+    <Key>
+      <PropertyRef Name="RolId" />
+    </Key>
+    <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RolAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="KullaniciTbls" Relationship="Self.FK_KullaniciTbl_RolTbl" FromRole="RolTbl" ToRole="KullaniciTbl" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_KullaniciTbl_RolTbl">
+    <End Role="RolTbl" Type="Self.RolTbl" Multiplicity="1" />
+    <End Role="KullaniciTbl" Type="Self.KullaniciTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RolTbl">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="KullaniciTbl">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankaOtomasyonDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="KullaniciTbls" EntityType="Self.KullaniciTbl" />
+    <EntitySet Name="RolTbls" EntityType="Self.RolTbl" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_KullaniciTbl_RolTbl" Association="Self.FK_KullaniciTbl_RolTbl">
+      <End Role="RolTbl" EntitySet="RolTbls" />
+      <End Role="KullaniciTbl" EntitySet="KullaniciTbls" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

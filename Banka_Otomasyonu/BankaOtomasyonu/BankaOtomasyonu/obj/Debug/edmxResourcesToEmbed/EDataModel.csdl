@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankaOtomasyonDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BankaOtomasyonEModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="HarcamaKategoriTbls" EntityType="BankaOtomasyonDbModel.HarcamaKategoriTbl" />
+    <EntitySet Name="HesapTbls" EntityType="BankaOtomasyonDbModel.HesapTbl" />
+    <EntitySet Name="KrediHarcamaDetayTbls" EntityType="BankaOtomasyonDbModel.KrediHarcamaDetayTbl" />
+    <EntitySet Name="KrediKartiDetayTbls" EntityType="BankaOtomasyonDbModel.KrediKartiDetayTbl" />
+    <EntitySet Name="KullaniciTbls" EntityType="BankaOtomasyonDbModel.KullaniciTbl" />
+    <EntitySet Name="RolTbls" EntityType="BankaOtomasyonDbModel.RolTbl" />
+    <EntitySet Name="sysdiagrams" EntityType="BankaOtomasyonDbModel.sysdiagram" />
+    <AssociationSet Name="FK_HesapTbl_KullaniciTbl" Association="BankaOtomasyonDbModel.FK_HesapTbl_KullaniciTbl">
+      <End Role="KullaniciTbl" EntitySet="KullaniciTbls" />
+      <End Role="HesapTbl" EntitySet="HesapTbls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KrediKartiDetayTbl_KullaniciTbl" Association="BankaOtomasyonDbModel.FK_KrediKartiDetayTbl_KullaniciTbl">
+      <End Role="KullaniciTbl" EntitySet="KullaniciTbls" />
+      <End Role="KrediKartiDetayTbl" EntitySet="KrediKartiDetayTbls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KullaniciTbl_RolTbl" Association="BankaOtomasyonDbModel.FK_KullaniciTbl_RolTbl">
+      <End Role="RolTbl" EntitySet="RolTbls" />
+      <End Role="KullaniciTbl" EntitySet="KullaniciTbls" />
+    </AssociationSet>
+    <EntitySet Name="HesapIslemDetays" EntityType="BankaOtomasyonDbModel.HesapIslemDetay" />
+  </EntityContainer>
+  <EntityType Name="HarcamaKategoriTbl">
+    <Key>
+      <PropertyRef Name="KategoriId" />
+    </Key>
+    <Property Name="KategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="HesapTbl">
+    <Key>
+      <PropertyRef Name="HesapId" />
+    </Key>
+    <Property Name="HesapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriNo" Type="Int32" Nullable="false" />
+    <Property Name="HesapNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="IbanNo" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="HesapBakiye" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="KullaniciTbl" Relationship="BankaOtomasyonDbModel.FK_HesapTbl_KullaniciTbl" FromRole="HesapTbl" ToRole="KullaniciTbl" />
+  </EntityType>
+  <EntityType Name="KrediHarcamaDetayTbl">
+    <Key>
+      <PropertyRef Name="IslemId" />
+    </Key>
+    <Property Name="IslemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HarcamaTutar" Type="Int32" Nullable="false" />
+    <Property Name="HarcamaKategoriId" Type="Int32" Nullable="false" />
+    <Property Name="KartId" Type="Int32" Nullable="false" />
+    <Property Name="IslemTarih" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="KrediKartiDetayTbl">
+    <Key>
+      <PropertyRef Name="KartNo" />
+    </Key>
+    <Property Name="KartNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriNo" Type="Int32" />
+    <Property Name="HesapKesTarih" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SonOdeme" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="EkstreTarih" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Bakiye" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="KullaniciTbl" Relationship="BankaOtomasyonDbModel.FK_KrediKartiDetayTbl_KullaniciTbl" FromRole="KrediKartiDetayTbl" ToRole="KullaniciTbl" />
+  </EntityType>
+  <EntityType Name="KullaniciTbl">
+    <Key>
+      <PropertyRef Name="KullaniciId" />
+    </Key>
+    <Property Name="KullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sifre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RolId" Type="Int32" Nullable="false" />
+    <Property Name="TcNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="Isım" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Soyisim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DogumTarih" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HesapTbls" Relationship="BankaOtomasyonDbModel.FK_HesapTbl_KullaniciTbl" FromRole="KullaniciTbl" ToRole="HesapTbl" />
+    <NavigationProperty Name="KrediKartiDetayTbls" Relationship="BankaOtomasyonDbModel.FK_KrediKartiDetayTbl_KullaniciTbl" FromRole="KullaniciTbl" ToRole="KrediKartiDetayTbl" />
+    <NavigationProperty Name="RolTbl" Relationship="BankaOtomasyonDbModel.FK_KullaniciTbl_RolTbl" FromRole="KullaniciTbl" ToRole="RolTbl" />
+  </EntityType>
+  <EntityType Name="RolTbl">
+    <Key>
+      <PropertyRef Name="RolId" />
+    </Key>
+    <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RolAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KullaniciTbls" Relationship="BankaOtomasyonDbModel.FK_KullaniciTbl_RolTbl" FromRole="RolTbl" ToRole="KullaniciTbl" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_HesapTbl_KullaniciTbl">
+    <End Type="BankaOtomasyonDbModel.KullaniciTbl" Role="KullaniciTbl" Multiplicity="1" />
+    <End Type="BankaOtomasyonDbModel.HesapTbl" Role="HesapTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KullaniciTbl">
+        <PropertyRef Name="KullaniciId" />
+      </Principal>
+      <Dependent Role="HesapTbl">
+        <PropertyRef Name="MusteriNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KrediKartiDetayTbl_KullaniciTbl">
+    <End Type="BankaOtomasyonDbModel.KullaniciTbl" Role="KullaniciTbl" Multiplicity="0..1" />
+    <End Type="BankaOtomasyonDbModel.KrediKartiDetayTbl" Role="KrediKartiDetayTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KullaniciTbl">
+        <PropertyRef Name="KullaniciId" />
+      </Principal>
+      <Dependent Role="KrediKartiDetayTbl">
+        <PropertyRef Name="MusteriNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KullaniciTbl_RolTbl">
+    <End Type="BankaOtomasyonDbModel.RolTbl" Role="RolTbl" Multiplicity="1" />
+    <End Type="BankaOtomasyonDbModel.KullaniciTbl" Role="KullaniciTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RolTbl">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="KullaniciTbl">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HesapIslemDetay">
+    <Key>
+      <PropertyRef Name="IslemId" />
+    </Key>
+    <Property Name="IslemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HesapNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="IslemTur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tutar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IslemTarih" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

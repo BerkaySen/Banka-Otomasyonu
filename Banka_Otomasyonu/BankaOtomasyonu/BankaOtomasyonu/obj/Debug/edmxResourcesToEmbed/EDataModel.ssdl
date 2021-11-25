@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankaOtomasyonDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="HarcamaKategoriTbl">
+    <Key>
+      <PropertyRef Name="KategoriId" />
+    </Key>
+    <Property Name="KategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HesapIslemDetay">
+    <Key>
+      <PropertyRef Name="IslemId" />
+    </Key>
+    <Property Name="IslemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HesapNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="IslemTur" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tutar" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IslemTarih" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HesapTbl">
+    <Key>
+      <PropertyRef Name="HesapId" />
+    </Key>
+    <Property Name="HesapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusteriNo" Type="int" Nullable="false" />
+    <Property Name="HesapNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="IbanNo" Type="nvarchar" MaxLength="24" Nullable="false" />
+    <Property Name="HesapBakiye" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KrediHarcamaDetayTbl">
+    <Key>
+      <PropertyRef Name="IslemId" />
+    </Key>
+    <Property Name="IslemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HarcamaTutar" Type="int" Nullable="false" />
+    <Property Name="HarcamaKategoriId" Type="int" Nullable="false" />
+    <Property Name="KartId" Type="int" Nullable="false" />
+    <Property Name="IslemTarih" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="KrediKartiDetayTbl">
+    <Key>
+      <PropertyRef Name="KartNo" />
+    </Key>
+    <Property Name="KartNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusteriNo" Type="int" />
+    <Property Name="HesapKesTarih" Type="nvarchar" MaxLength="50" />
+    <Property Name="SonOdeme" Type="nchar" MaxLength="10" />
+    <Property Name="EkstreTarih" Type="nchar" MaxLength="10" />
+    <Property Name="Bakiye" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KullaniciTbl">
+    <Key>
+      <PropertyRef Name="KullaniciId" />
+    </Key>
+    <Property Name="KullaniciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RolId" Type="int" Nullable="false" />
+    <Property Name="TcNo" Type="nvarchar" MaxLength="11" />
+    <Property Name="Isım" Type="nvarchar" MaxLength="50" />
+    <Property Name="Soyisim" Type="nvarchar" MaxLength="50" />
+    <Property Name="DogumTarih" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="RolTbl">
+    <Key>
+      <PropertyRef Name="RolId" />
+    </Key>
+    <Property Name="RolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RolAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_HesapTbl_KullaniciTbl">
+    <End Role="KullaniciTbl" Type="Self.KullaniciTbl" Multiplicity="1" />
+    <End Role="HesapTbl" Type="Self.HesapTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KullaniciTbl">
+        <PropertyRef Name="KullaniciId" />
+      </Principal>
+      <Dependent Role="HesapTbl">
+        <PropertyRef Name="MusteriNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KrediKartiDetayTbl_KullaniciTbl">
+    <End Role="KullaniciTbl" Type="Self.KullaniciTbl" Multiplicity="0..1" />
+    <End Role="KrediKartiDetayTbl" Type="Self.KrediKartiDetayTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KullaniciTbl">
+        <PropertyRef Name="KullaniciId" />
+      </Principal>
+      <Dependent Role="KrediKartiDetayTbl">
+        <PropertyRef Name="MusteriNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KullaniciTbl_RolTbl">
+    <End Role="RolTbl" Type="Self.RolTbl" Multiplicity="1" />
+    <End Role="KullaniciTbl" Type="Self.KullaniciTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RolTbl">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="KullaniciTbl">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankaOtomasyonDbModelStoreContainer">
+    <EntitySet Name="HarcamaKategoriTbl" EntityType="Self.HarcamaKategoriTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HesapIslemDetay" EntityType="Self.HesapIslemDetay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HesapTbl" EntityType="Self.HesapTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KrediHarcamaDetayTbl" EntityType="Self.KrediHarcamaDetayTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KrediKartiDetayTbl" EntityType="Self.KrediKartiDetayTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KullaniciTbl" EntityType="Self.KullaniciTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolTbl" EntityType="Self.RolTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_HesapTbl_KullaniciTbl" Association="Self.FK_HesapTbl_KullaniciTbl">
+      <End Role="KullaniciTbl" EntitySet="KullaniciTbl" />
+      <End Role="HesapTbl" EntitySet="HesapTbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KrediKartiDetayTbl_KullaniciTbl" Association="Self.FK_KrediKartiDetayTbl_KullaniciTbl">
+      <End Role="KullaniciTbl" EntitySet="KullaniciTbl" />
+      <End Role="KrediKartiDetayTbl" EntitySet="KrediKartiDetayTbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KullaniciTbl_RolTbl" Association="Self.FK_KullaniciTbl_RolTbl">
+      <End Role="RolTbl" EntitySet="RolTbl" />
+      <End Role="KullaniciTbl" EntitySet="KullaniciTbl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
